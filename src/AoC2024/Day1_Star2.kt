@@ -1,3 +1,5 @@
+package AoC2024;
+
 import java.util.*
 
 // Hola, soy un comentario
