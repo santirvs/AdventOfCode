@@ -23,15 +23,14 @@ fun main() {
 
 fun buscar(matriz: List<List<Char>>, palabra: String): Int {
     var cantidad:Int = 0
-/*
+
     //Buscar la palabra en todas las direcciones posibles
     cantidad += buscarPalabraHorizontal(matriz, palabra)
     cantidad += buscarPalabraVertical(matriz, palabra)
 
     cantidad += buscarPalabraDiagonalDescendente(matriz, palabra)
-*/
-//    cantidad += buscarPalabraDiagonalAscendenteAdelante(matriz, palabra)
-    cantidad += buscarPalabraDiagonalAscendenteAtras(matriz, palabra)
+
+    cantidad += buscarPalabraDiagonalAscendente(matriz, palabra)  //5
 
 
     return cantidad
@@ -40,7 +39,7 @@ fun buscar(matriz: List<List<Char>>, palabra: String): Int {
 fun buscarPalabraHorizontal(matriz: List<List<Char>>, palabra: String): Int {
     var cantidad = 0
     for (fila in matriz.indices) {
-        for (columna in 0 until matriz[0].lastIndex - palabra.lastIndex) {
+        for (columna in 0 .. matriz[0].lastIndex - palabra.lastIndex) {
             var nuevaPalabra:String = ""
             for (pos in 0 .. palabra.lastIndex) {
                 nuevaPalabra += matriz[fila][columna + pos]
@@ -87,15 +86,15 @@ fun buscarPalabraDiagonalDescendente(matriz: List<List<Char>>, palabra: String):
     return cantidad
 }
 
-fun buscarPalabraDiagonalAscendenteAdelante(matriz: List<List<Char>>, palabra: String): Int {
+fun buscarPalabraDiagonalAscendente(matriz: List<List<Char>>, palabra: String): Int {
     var cantidad = 0
-    for (fila in matriz.lastIndex downTo palabra.lastIndex ) {
-        for (columna in 0 until matriz.lastIndex - palabra.lastIndex) {
+    for (fila in palabra.lastIndex .. matriz.lastIndex ) {
+        for (columna in 0 .. matriz.lastIndex - palabra.lastIndex) {
             var nuevaPalabra:String = ""
             for (pos in 0 .. palabra.lastIndex) {
                 nuevaPalabra += matriz[fila-pos][columna+pos]
             }
-            if (nuevaPalabra == palabra) {
+            if (nuevaPalabra == palabra || nuevaPalabra == palabra.reversed()) {
                 cantidad++
             }
         }
@@ -105,13 +104,13 @@ fun buscarPalabraDiagonalAscendenteAdelante(matriz: List<List<Char>>, palabra: S
 
 fun buscarPalabraDiagonalAscendenteAtras(matriz: List<List<Char>>, palabra: String): Int {
     var cantidad = 0
-    for (fila in matriz.lastIndex downTo palabra.lastIndex ) {
+    for (fila in 0 until matriz.lastIndex - palabra.lastIndex ) {
         for (columna in matriz[fila].lastIndex downTo palabra.lastIndex) {
             var nuevaPalabra:String = ""
             for (pos in 0 .. palabra.lastIndex) {
-                nuevaPalabra += matriz[fila-pos][columna-pos]
+                nuevaPalabra += matriz[fila+pos][columna-pos]
             }
-            if (nuevaPalabra == palabra) {
+            if (nuevaPalabra == palabra ) {
                 cantidad++
             }
         }
