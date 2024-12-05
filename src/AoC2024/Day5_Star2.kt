@@ -1,4 +1,4 @@
-package AoC2024;
+package AoC2024
 
 import java.util.*
 import kotlin.collections.HashMap
@@ -6,17 +6,17 @@ import kotlin.collections.HashMap
 fun main() {
     val scan = Scanner(System.`in`)
 
-    var precedencias: HashMap<Int, MutableList<Int>> = HashMap<Int, MutableList<Int>>()
+    val precedencias: HashMap<Int, MutableList<Int>> = HashMap<Int, MutableList<Int>>()
 
     //Cargar matriz de datos
     while (scan.hasNextLine()) {
-        var linea = scan.nextLine()
+        val linea = scan.nextLine()
         if (linea == "") break  //Cambio de sección
 
         //Cargar la línea en el mapa de precedencias
-        var partes = linea.split("|")
-        var numAntes: Int = partes[0].toInt()
-        var numDespues: Int = partes[1].toInt()
+        val partes = linea.split("|")
+        val numAntes: Int = partes[0].toInt()
+        val numDespues: Int = partes[1].toInt()
         if (precedencias.containsKey(numAntes)) {
             precedencias[numAntes]!!.add(numDespues)
         } else {
@@ -27,11 +27,11 @@ fun main() {
     var sumaPaginasCentrales = 0
 
     while (scan.hasNextLine()) {
-        var linea = scan.nextLine()
+        val linea = scan.nextLine()
         if (linea == "-1") break  //Salida manual interactiva
 
         //Descomponer la línea en partes
-        var partes = linea.split(",")
+        val partes = linea.split(",")
 
         //Comprobar que las partes respetan el mapa de precedencias
         var respetaPrecedencias = true
@@ -47,7 +47,7 @@ fun main() {
 
         if (!respetaPrecedencias) {
             //Ordenar las partes
-            var listaOrdenada = ordenarPartes(partes, precedencias)
+            val listaOrdenada = ordenarPartes(partes, precedencias)
 
             sumaPaginasCentrales += listaOrdenada[listaOrdenada.size/2].toInt()
 
@@ -61,11 +61,11 @@ fun main() {
 }
 
 fun ordenarPartes(partes: List<String>, precedencias: HashMap<Int, MutableList<Int>>): List<String> {
-    var partesOrdenadas = mutableListOf<String>()
-    var partesRestantes = partes.toMutableList()
+    val partesOrdenadas = mutableListOf<String>()
+    val partesRestantes = partes.toMutableList()
 
     while (partesRestantes.isNotEmpty()) {
-        var parte = partesRestantes.removeAt(0)
+        val parte = partesRestantes.removeAt(0)
         if (partesOrdenadas.isEmpty()) {
             partesOrdenadas.add(parte)
         } else {
