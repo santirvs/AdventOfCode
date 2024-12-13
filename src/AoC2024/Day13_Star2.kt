@@ -6,80 +6,60 @@ import kotlin.collections.HashSet
 
 
 //Ahora ya no sirve la búsqueda en un espacio de soluciones, ya que el número es demasiado grande
+//Se puede plantear como un sistema de ecuaciones lineales
 
-/*
+fun main() {
+    val scan = Scanner(System.`in`)
 
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <cmath>
+    var totalTokens : Long = 0L
 
-std::vector<std::string> split(const std::string& s, const std::string& delimiter)
-{
-    size_t pos_start = 0, pos_end, delim_len = delimiter.length();
-    std::string token;
-    std::vector<std::string> res;
+    while (scan.hasNext()) {
+        var linea = scan.nextLine()
+        if (linea == "-1") break  //Final de la entrada manual
 
-    while ((pos_end = s.find(delimiter, pos_start)) != std::string::npos) {
-        token = s.substr(pos_start, pos_end - pos_start);
-        pos_start = pos_end + delim_len;
-        res.push_back(token);
+        //Separador de casos
+        if (linea == "")
+            linea = scan.nextLine()
+
+        //Parsear la entrada
+        //Button A
+        var movsA = linea.split(":")[1].split(",")
+        var desplazAX = movsA[0].substring(3).toInt()
+        var desplazAY = movsA[1].substring(3).toInt()
+
+        //Button B
+        var movsB = scan.nextLine().split(":")[1].split(",")
+        var desplazBX = movsB[0].substring(3).toInt()
+        var desplazBY = movsB[1].substring(3).toInt()
+
+        //Destino
+        var destino = scan.nextLine().split(":")[1].split(",")
+        var destX = destino[0].substring(3).toLong() // + 10000000000000
+        var destY = destino[1].substring(3).toLong() // + 10000000000000
+
+
+        // Resuelve el sistema de ecuaciones mediante el métode de Cramer
+        //  a.x + b.x = target_x
+        //  a.y + b.y = target_y
+
+        val det_norm = desplazAX * desplazBY - desplazBX * desplazAY
+        val det_x = destX * desplazBY - destY * desplazBX
+        val x = det_x.toDouble() / det_norm
+        val det_y = desplazAX * destY - destX * desplazAY
+        val y = det_y.toDouble() / det_norm
+
+        var encontrado = true
+
+        val EPSILON = Math.pow(10.0, -8.0)
+        if (Math.abs(x - Math.round(x)) > EPSILON || Math.abs(y - Math.round(y)) > EPSILON)
+            encontrado = false
+        if (x < 0 || y < 0)
+            encontrado = false
+
+        if (encontrado)
+            totalTokens += x.toLong() * 3 + y.toLong()
+
     }
-
-    res.push_back(s.substr(pos_start));
-    return res;
-}
-
-int main()
-{
-    long long a_xdiff, a_ydiff, b_xdiff, b_ydiff, target_x, target_y;
-    std::ifstream in("stdin.txt");
-    std::string line;
-    unsigned long long p2 = 0;
-    while (getline(in, line)) {
-    std::vector<std::string> aparts = split(line, " ");
-    std::string a_xdiff_str = aparts[2].substr(0, aparts[2].size() - 1);
-    a_xdiff = std::stoi(split(a_xdiff_str, "+")[1]);
-    a_ydiff = std::stoi(split(aparts[3], "+")[1]);
-
-    getline(in, line);
-    std::vector<std::string> bparts = split(line, " ");
-    std::string b_xdiff_str = bparts[2].substr(0, bparts[2].size() - 1);
-    b_xdiff = std::stoi(split(b_xdiff_str, "+")[1]);
-    b_ydiff = std::stoi(split(bparts[3], "+")[1]);
-
-    getline(in, line);
-    std::vector<std::string> target = split(line, " ");
-    std::string target_x_str = target[1].substr(0, target[1].size() - 1);
-    target_x = std::stoi(split(target_x_str, "=")[1]) + 10000000000000;
-    target_y = std::stoi(split(target[2], "=")[1]) + 10000000000000; //ten trillion babeeey
-
-    getline(in, line); // random newlines
-
-    // this can be represented as a matrix
-    // a.x b.x
-    // a.y b.y
-    // multiplied by (a presses, b presses)
-    // that's equal to (target_x, target_y)
-    long long det_norm = a_xdiff * b_ydiff - b_xdiff * a_ydiff;
-    long long det_x = target_x * b_ydiff - target_y * b_xdiff;
-    double x = (double)det_x / (double)det_norm;
-    long long det_y = a_xdiff * target_y - target_x * a_ydiff;
-    double y = (double)det_y / (double)det_norm;
-
-    const double EPSILON = std::pow(10, -8);
-    std::cout << "x: " << x << ", y: " << y << '\n';
-    if (std::abs(x - std::llround(x)) > EPSILON || std::abs(y - std::llround(y)) > EPSILON)
-        continue;
-    if (x < 0 || y < 0)
-        continue;
-
-    p2 += 3 * x + y;
-
+    println("Total tokens: $totalTokens")
 
 }
-    std::cout << "p2: " << p2 << '\n';
-}
-
-*/

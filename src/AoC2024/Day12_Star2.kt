@@ -5,7 +5,21 @@ import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
 
+//El enfoque de fuerza bruta no es viable, ya que el número de combinaciones posibles es demasiado grande
+//Aquí debe buscarse una solución más eficiente
+//Un polígono de N lados tiene N ángulos, por lo tanto, hay que determinar para cada casilla cuántos ángulos tiene
+//Un ángulo puede ser cóncavo o convexo
+//Un ángulo cóncavo está formado por  (o cualquiera de sus rotaciones)
+//   A X
+//   A A
+// Un ángulo convexo está formado por (o cualquiera de sus rotaciones)
+//   X X
+//   A X
+//
+
+
 /*
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -125,4 +139,4 @@ int main()
     }
     std::cout << "p2: " << p2 << '\n';
 }
- */
+*/

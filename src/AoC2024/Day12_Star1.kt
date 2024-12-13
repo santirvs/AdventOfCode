@@ -93,8 +93,6 @@ fun main() {
     var resultado = regiones.map { r -> r.area * r.perimetro }.sum()
     println("Resultado: $resultado")
 
-
-
 }
 
 
