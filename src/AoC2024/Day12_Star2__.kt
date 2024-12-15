@@ -1,9 +1,5 @@
 package AoC2024
 
-import java.util.*
-import kotlin.collections.HashMap
-import kotlin.collections.HashSet
-
 
 //El enfoque de fuerza bruta no es viable, ya que el número de combinaciones posibles es demasiado grande
 //Aquí debe buscarse una solución más eficiente
