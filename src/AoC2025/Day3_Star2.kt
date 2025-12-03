@@ -1,5 +1,6 @@
 package AoC2025;
 
+import java.math.BigInteger
 import java.util.*
 
 // Leer cada entrada (mientras no sea 0)
@@ -13,10 +14,11 @@ fun main() {
     val scan = Scanner(System.`in`)
 
     var entrada = scan.nextLine()
-    var suma : Long = 0
+    var suma : BigInteger = BigInteger.ZERO
     while (entrada != "0") {
+        suma = suma.add(BigInteger(tratarCaso2(entrada).toString()))
 
-        suma += tratarCaso2(entrada)
+        println("El total vale ahora: $suma" )
 
         entrada = scan.nextLine()
     }
