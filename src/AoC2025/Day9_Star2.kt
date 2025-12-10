@@ -92,9 +92,9 @@ fun sol2(filename: String): Int {
 
 fun main() {
     println("--- Part 1 ---")
-    println("Test: ${sol1("entradas/test.txt")}")
-    println("Solution: ${sol1("entradas/input.txt")}")
+    println("Test: ${sol1("entradas/2025_09_test.txt")}")
+    println("Solution: ${sol1("entradas/2025_09_input.txt")}")
     println("--- Part 2 ---")
-    println("Test: ${sol2("entradas/test.txt")}")
-    println("Solution: ${sol2("entradas/input.txt")}")
+    println("Test: ${sol2("entradas/2025_09_test.txt")}")
+    println("Solution: ${sol2("entradas/2025_09_input.txt")}")
 }
